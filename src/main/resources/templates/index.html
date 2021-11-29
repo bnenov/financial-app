@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Yodlee Sample App</title>
+    <script type='text/javascript' src='https://cdn.yodlee.com/fastlink/v3/initialize.js'></script>
+</head>
+<body>
+
+<header>
+    <main>
+        <div style="text-align: center;">
+            <h1>Welcome to Yodlee Sample App</h1>
+            <h3>Would you like to link an account?</h3>
+        </div>
+        <div id="container-fastlink">
+            <div style="text-align: center;">
+                <input type="submit" id="btn-fastlink" value="Link an Account">
+            </div>
+        </div>
+        <div style="text-align: center;">
+            <h3>Would you like to view your accounts?</h3>
+        </div>
+        <div>
+            <div style="text-align: center;">
+                <a href="/accounts">Show accounts</a>
+            </div>
+        </div>
+    </main>
+</header>
+<script th:inline="javascript">
+
+    (function (window) {
+      //Open FastLink
+      var fastlinkBtn = document.getElementById('btn-fastlink');
+      var tkn = [[${token}]]
+      fastlinkBtn.addEventListener('click', function() {
+        window.fastlink.open({
+          fastLinkURL: 'https://node.sandbox.yodlee.uk/authenticate/uksandbox',
+          accessToken: 'Bearer ' + tkn,
+          params: {
+            userExperienceFlow : 'Aggregation'
+          },
+          onSuccess: function (data) {
+            console.log(data);
+          },
+          onError: function (data) {
+            console.log(data);
+          },
+          onExit: function (data) {
+            console.log(data);
+          },
+          onEvent: function (data) {
+            console.log(data);
+          }
+        },
+        'container-fastlink');
+      },
+      false);
+    }(window));
+  </script>
+</body>
+</html>

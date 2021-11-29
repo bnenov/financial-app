@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Accounts</title>
+</head>
+<body>
+<main>
+    <header>
+        <nav>
+            <h1 align="center"><a href="/">Home</a></h1>
+        </nav>
+    </header>
+    <div style="text-align: center;">
+        <h1>Your Providers:</h1>
+    </div>
+    <div>
+        <div align="center" th:if="${hasAccounts} == false">
+            <h2>No accounts available!</h2>
+        </div>
+        <div th:unless="${hasAccounts} == false">
+            <th:block th:each="provider : ${userData.getProviders()}">
+                <div>
+                    <h1 align="center" th:text="'Provider: ' + ${provider.getName()}"></h1>
+                </div>
+                <div>
+                    <th:block th:each="providerAccount : ${provider.getProviderAccounts()}">
+                        <th:block th:each="account : ${providerAccount.getAccounts()}">
+                            <div>
+                                <table border="1" align="center">
+                                    <tr>
+                                        <th colspan="3">Account</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Balance</th>
+                                    </tr>
+                                    <tr>
+                                        <td th:text="${account.getAccountName()}"></td>
+                                        <td th:text="${account.getAccountType()}"></td>
+                                        <td th:text="${account.getBalance().getCurrency()} + ' ' + ${account.getBalance().getAmount()}"></td>
+                                    </tr>
+                                    <th:block th:each="holding : ${account.getHoldings()}">
+                                        <tr>
+                                            <td>
+
+
+                                                <table border="1">
+                                                    <tr>
+                                                        <th colspan="4">Holding</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                        <th>Quantity</th>
+                                                        <th>Value</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td th:text="${holding.getHoldingType()}"></td>
+                                                        <td th:text="${holding.getDescription()}"></td>
+                                                        <td th:text="${holding.getQuantity()}"></td>
+                                                        <td th:text="${holding.getValue().getCurrency} + ' ' + ${holding.getValue().getAmount()}"></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <br/>
+                                    </th:block>
+                                </table>
+                                <br/>
+                            </div>
+                        </th:block>
+                    </th:block>
+                </div>
+                <br/>
+            </th:block>
+        </div>
+    </div>
+</main>
+</body>
+</html>
