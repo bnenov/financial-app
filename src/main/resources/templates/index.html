@@ -3,31 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Yodlee Sample App</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/reset-css.css"/>
     <script type='text/javascript' src='https://cdn.yodlee.com/fastlink/v3/initialize.js'></script>
 </head>
 <body>
 
 <header>
-    <main>
-        <div style="text-align: center;">
-            <h1>Welcome to Yodlee Sample App</h1>
-            <h3>Would you like to link an account?</h3>
-        </div>
-        <div id="container-fastlink">
-            <div style="text-align: center;">
-                <input type="submit" id="btn-fastlink" value="Link an Account">
-            </div>
-        </div>
-        <div style="text-align: center;">
-            <h3>Would you like to view your accounts?</h3>
-        </div>
-        <div>
-            <div style="text-align: center;">
-                <a href="/accounts">Show accounts</a>
-            </div>
-        </div>
-    </main>
+    <div class="header">
+        <h1>Financial App</h1>
+    </div>
 </header>
+<main>
+
+    <div class="container bg-blur">
+        <div>
+            <h1>Welcome to Financial App</h1>
+        </div>
+        <ul class="activities">
+            <li>
+                <div class="item-header">
+                    <h3>Link accounts</h3>
+                </div>
+                <div id="container-fastlink">
+                    <div style="text-align: center;">
+                        <input class="button" type="submit" id="btn-fastlink" value="Link an Account">
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="item-header">
+                    <h3>View accounts</h3>
+                </div>
+                <div>
+                    <input class="button" type="button" th:onclick="window.location.href='/accounts'" value="Show accounts" />
+                </div>
+            </li>
+        </ul>
+    </div>
+</main>
 <script th:inline="javascript">
 
     (function (window) {
@@ -41,6 +55,7 @@
           params: {
             userExperienceFlow : 'Aggregation'
           },
+          forceIframe: true,
           onSuccess: function (data) {
             console.log(data);
           },
@@ -58,6 +73,10 @@
       },
       false);
     }(window));
-  </script>
+
+
+
+
+</script>
 </body>
 </html>
