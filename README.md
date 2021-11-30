@@ -3,6 +3,8 @@
 Financial activities management app which provides the option to link an account to an institution and check the balances and assets.
 The app uses Yodlee to link accounts and get the financial assets.
 
+The app is created with Spring Boot and Thymeleaf.
+
 ![financial-app](https://github.com/bnenov/financial-app/blob/main/images/financialapp.PNG)
 
 ## Features
